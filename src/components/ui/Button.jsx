@@ -1,8 +1,6 @@
-export default function Button({ text = "Visit", Link, className="" }) {
-    return (
-        <a href={Link} target="_blank" rel="noopener noreferrer"
-            className={`group relative flex h-10 max-w-screen items-center justify-between overflow-hidden border-4 border-black bg-black pl-1 pr-0 ${className}`}
-        >
+export default function Button({ text = "Visit", Link, className="", onClick }) {
+    const buttonContent = (
+        <>
             <span
                 className="absolute inset-y-0 right-0 w-0 bg-[#e65e5e] transition-all duration-300 ease-in-out group-hover:w-full"
             ></span>
@@ -30,6 +28,12 @@ export default function Button({ text = "Visit", Link, className="" }) {
                     ></path>
                 </svg>
             </span>
-        </a>
+        </>
+    );
+
+    return (
+        onClick
+            ? <button type="button" onClick={onClick} className={`group relative flex h-10 max-w-screen items-center justify-between overflow-hidden border-4 border-black bg-black pl-1 pr-0 ${className}`}>{buttonContent}</button>
+            : <a href={Link} target="_blank" rel="noopener noreferrer" className={`group relative flex h-10 max-w-screen items-center justify-between overflow-hidden border-4 border-black bg-black pl-1 pr-0 ${className}`}>{buttonContent}</a>
     );
 }

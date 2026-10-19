@@ -91,6 +91,12 @@ const sites = [
         url: "http://10.80.17.60:3002",
         msg: "Internal Hr vacancies manager",
     },
+    {
+        type: types.PROJECTS,
+        name: "PLMC WMSs",
+        url: "http://10.82.31.93:5002/",
+        msg: "IA project", 
+    },
     /* Others */
     {
         type: types.OTHERS,
@@ -103,6 +109,18 @@ const sites = [
         name: "Reports",
         url: "https://qmmcmx.sharepoint.com/:x:/r/sites/MIS-Software2/_layouts/15/Doc.aspx?sourcedoc=%7BCAFE8264-01A1-4C47-9003-CA7E6EF75E2F%7D&file=MIS-Software%20Reports%202026.xlsx&action=default&mobileredirect=true",
         msg: "MIS weekly reports", 
+    },
+    {
+        type: types.OTHERS,
+        name: "Cubito",
+        url: "https://eaglercraft.com/es/play?version=1.8.8-wasm",
+        msg: "Cubito Online", 
+    },
+    {
+        type: types.OTHERS,
+        name: "Finanzas",
+        url: "https://onedrive.live.com/personal/b857987da7f4a1f1/_layouts/15/doc2.aspx?resid=b25cbacd-095d-4d21-834c-1c49ee581f2f&cid=b857987da7f4a1f1",
+        msg: "Finanzas", 
     },
 ]
 

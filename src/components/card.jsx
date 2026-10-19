@@ -1,8 +1,29 @@
 import { useTheme } from "../context/ThemeContext"
 import Button from "./ui/Button";
+import {
+    getLocalHtmlId,
+    isLegacyLocalFileLink,
+    isLocalHtmlLink,
+    openLocalHtmlFile,
+} from "../utils/localHtmlFiles";
 
 export default function Card({ Name = "None", Link, Type, msg }) {
     useTheme()
+    const isLocalHtml = isLocalHtmlLink(Link);
+    const isLegacyLocalFile = isLegacyLocalFileLink(Link);
+
+    async function handleOpenLocalHtml() {
+        try {
+            await openLocalHtmlFile(getLocalHtmlId(Link));
+        } catch (error) {
+            window.alert(`No se pudo abrir el archivo HTML: ${error.message}`);
+        }
+    }
+
+    function handleLegacyLocalFile() {
+        window.alert("El navegador bloquea las rutas file://. Edita este sitio y vuelve a seleccionar el archivo HTML desde tu equipo.");
+    }
+
     const gradient = {
         "Quanta sites": "bg-gradient-to-br from-cyan-400/80 via-sky-500/60 to-slate-950/90",
         "Projects": "bg-gradient-to-br from-indigo-400/80 via-blue-500/60 to-slate-950/90",
@@ -30,7 +51,12 @@ export default function Card({ Name = "None", Link, Type, msg }) {
 
             <div className="absolute bottom-0 left-0 flex w-full translate-y-full items-center gap-3 border-t border-white/15 bg-slate-950/80 p-3 opacity-0 backdrop-blur-md transition-all duration-300 group-hover/card:translate-y-0 group-hover/card:opacity-100">
                     <p className="w-full whitespace-normal wrap-break-word px-1 text-xs leading-4 text-stone-100">{msg}</p>
-                <Button className="shrink-0" text="Visit" Link={Link} />
+                <Button
+                    className="shrink-0"
+                    text={isLocalHtml ? "Open" : isLegacyLocalFile ? "Re-select" : "Visit"}
+                    Link={Link}
+                    onClick={isLocalHtml ? handleOpenLocalHtml : isLegacyLocalFile ? handleLegacyLocalFile : undefined}
+                />
             </div>
         </div>
     );

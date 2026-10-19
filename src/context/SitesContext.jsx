@@ -25,12 +25,12 @@ export function SitesProvider({ children }) {
   const [sites, setSites] = useState(getStoredSites);
 
   function saveSites(nextSites) {
-    setSites(nextSites);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(nextSites));
+    setSites(nextSites);
   }
 
   function addSite(site) {
-    saveSites([...sites, { ...site, id: createSiteId() }]);
+    saveSites([...sites, { ...site, id: site.id ?? createSiteId() }]);
   }
 
   function updateSite(id, site) {
