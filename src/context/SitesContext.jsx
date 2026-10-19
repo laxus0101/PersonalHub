@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import initialSites from "../data/sites";
 
 const SitesContext = createContext(null);
 
@@ -15,7 +14,7 @@ function normalizeSites(sites) {
 }
 
 export function SitesProvider({ children }) {
-  const [sites, setSites] = useState(() => normalizeSites(initialSites));
+  const [sites, setSites] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // Load sites from CSV via backend API
@@ -25,12 +24,12 @@ export function SitesProvider({ children }) {
         const response = await fetch("/api/sites");
         if (response.ok) {
           const data = await response.json();
-          if (Array.isArray(data) && data.length > 0) {
+          if (Array.isArray(data)) {
             setSites(normalizeSites(data));
           }
         }
       } catch (error) {
-        console.warn("Could not fetch sites from CSV API, using defaults:", error);
+        console.warn("Could not fetch sites from CSV API:", error);
       } finally {
         setLoading(false);
       }
@@ -85,23 +84,8 @@ export function SitesProvider({ children }) {
     }
   }
 
-  async function resetSites() {
-    const defaultSites = initialSites.map((site) => ({ ...site, id: createSiteId() }));
-    setSites(defaultSites);
-
-    try {
-      await fetch("/api/sites", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(defaultSites),
-      });
-    } catch (error) {
-      console.error("Failed to reset sites in CSV:", error);
-    }
-  }
-
   return (
-    <SitesContext.Provider value={{ sites, loading, addSite, updateSite, removeSite, resetSites }}>
+    <SitesContext.Provider value={{ sites, loading, addSite, updateSite, removeSite }}>
       {children}
     </SitesContext.Provider>
   );
