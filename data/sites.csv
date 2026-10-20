@@ -11,7 +11,6 @@ id,name,url,msg,type,fileName
 10,Phone Validation,http://10.80.17.60:7000/,Phone validation registration and login site,Projects,
 11,MeetingRooms,http://10.80.17.60:3051/login,Dedicated app to manage meeting rooms appointments,Projects,
 12,Asset Manager,http://10.80.17.60:3000/dashboard,Manage IT assets on dedicated app,Projects,
-13,Front Template,http://localhost:5173/landing,Front template,Projects,
 14,Hr Internal,http://10.80.17.60:3002,Internal Hr vacancies manager,Projects,
 15,PLMC WMSs,http://10.82.31.93:5002/,IA project,Projects,
 16,STIRLING PDF,http://10.80.17.60:9000/?lang=en_US,Usefull tools that can be used to a manipulete PDFs,Others,
